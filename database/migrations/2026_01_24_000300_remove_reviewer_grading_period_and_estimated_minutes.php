@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('reviewers', function (Blueprint $table) {
+            if (Schema::hasColumn('reviewers', 'grading_period')) {
+                $table->dropColumn('grading_period');
+            }
+            if (Schema::hasColumn('reviewers', 'estimated_minutes')) {
+                $table->dropColumn('estimated_minutes');
+            }
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('reviewers', function (Blueprint $table) {
+            if (!Schema::hasColumn('reviewers', 'grading_period')) {
+                $table->string('grading_period', 10)->nullable();
+            }
+            if (!Schema::hasColumn('reviewers', 'estimated_minutes')) {
+                $table->unsignedInteger('estimated_minutes')->nullable();
+            }
+        });
+    }
+};

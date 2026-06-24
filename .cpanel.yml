@@ -1,0 +1,124 @@
+---
+deployment:
+  tasks:
+    # Load deployment config
+    - |
+      if [ ! -f .deploy.conf ]; then
+        cp .deploy.example.conf .deploy.conf
+      fi
+      source .deploy.conf
+
+    # Set variables
+    - export DEPLOY_LOG="$DEPLOY_PATH/deploy-$(date +%F-%H%M%S).log"
+
+    # Ensure deployment path exists
+    - mkdir -p "$DEPLOY_PATH"
+
+    # Start deployment
+    - echo "=== Deployment started at $(date)" > "$DEPLOY_LOG"
+
+    # Sync files (rsync if available, fallback to cp)
+    - |
+      echo "=== Syncing files" >> "$DEPLOY_LOG"
+      rsync -av --delete \
+        --exclude ".git*" \
+        --exclude ".env" \
+        --exclude "node_modules" \
+        --exclude "public" \
+        --exclude "storage/app/*" \
+        --exclude "storage/logs/*" \
+        --exclude "tests" \
+        --exclude ".cpanel.yml" \
+        --exclude ".deploy.conf" \
+        --exclude ".deploy.example.conf" \
+        ./ "$DEPLOY_PATH/" >> "$DEPLOY_LOG" 2>&1
+
+    # Ensure webroot folder exists
+    - mkdir -p "$PUBLIC_PATH"
+
+    # Copy public assets into public demo directory
+    - |
+      if [ -d "./public" ]; then
+        rsync -av --delete \
+          --exclude "index.php" \
+          --exclude "build/manifest.json" \
+          --exclude ".htaccess" \
+          "./public/" "$PUBLIC_PATH/" >> "$DEPLOY_LOG" 2>&1
+      else
+        echo "=== Skipped: no public directory found" >> "$DEPLOY_LOG"
+      fi
+
+    # Keep manifest at deploy build path
+    - |
+      if [ -f "./public/build/manifest.json" ]; then
+        mkdir -p "$DEPLOY_PATH/public/build"
+        rsync -av "./public/build/manifest.json" "$DEPLOY_PATH/public/build/" >> "$DEPLOY_LOG" 2>&1
+      fi
+
+    # Ensure storage/app/public exists and seed only missing files
+    - |
+      mkdir -p "$DEPLOY_PATH/storage/app/public"
+      rsync -av --ignore-existing "./storage/app/public/" "$DEPLOY_PATH/storage/app/public/" >> "$DEPLOY_LOG" 2>&1
+
+    # Ensure storage/app/private exists and seed only missing files
+    - |
+      mkdir -p "$DEPLOY_PATH/storage/app/private"
+      rsync -av --ignore-existing "./storage/app/private/" "$DEPLOY_PATH/storage/app/private/" >> "$DEPLOY_LOG" 2>&1
+
+    # Switch working directory
+    - cd "$DEPLOY_PATH"
+
+    # Setup composer (global install in ~/bin for reuse)
+    - |
+      mkdir -p "$HOME/bin"
+      if [ ! -f "$HOME/bin/composer.phar" ]; then
+        wget -O "$HOME/bin/composer.phar" https://getcomposer.org/composer-stable.phar
+      fi
+      php "$HOME/bin/composer.phar" install --no-interaction --ignore-platform-reqs >> "$DEPLOY_LOG" 2>&1
+
+    # Setup dotenv
+    - |
+      if [ ! -f .env ]; then
+        cp .env.example .env
+        php artisan key:generate >> "$DEPLOY_LOG" 2>&1
+      fi
+
+    # Run migrations if flag is enabled
+    - |
+      if [[ "$RUN_MIGRATIONS" == "true" ]]; then
+        php artisan migrate --force >> "$DEPLOY_LOG" 2>&1
+      else
+        echo "=== Skipped migrations (RUN_MIGRATIONS not set to true)" >> "$DEPLOY_LOG"
+      fi
+
+    # Run optimization if flag is true
+    - |
+      if [[ "$RUN_OPTIMIZATION" == "true" ]]; then
+        php artisan optimize:clear >> "$DEPLOY_LOG" 2>&1
+        php artisan optimize >> "$DEPLOY_LOG" 2>&1
+      else
+        echo "=== Skipped optimization (RUN_OPTIMIZATION not set to true)" >> "$DEPLOY_LOG"
+      fi
+
+    # Link storage
+    - |
+      ln -sfn "$DEPLOY_PATH/storage/app/public" "$PUBLIC_PATH/storage"
+      echo "=== Storage symlink created" >> "$DEPLOY_LOG"
+
+    # Switch to public directory
+    - cd "$PUBLIC_PATH"
+
+    # Setup .htaccess
+    - |
+      if [ ! -f .htaccess ]; then
+        cp "$DEPLOY_PATH/.deploy.htaccess" .htaccess
+      fi
+
+    # Setup index.php
+    - |
+      if [ ! -f index.php ]; then
+        cp "$DEPLOY_PATH/.deploy.index.php" index.php
+      fi
+
+    # Done
+    - echo "=== Deployment finished at $(date)" >> "$DEPLOY_LOG"

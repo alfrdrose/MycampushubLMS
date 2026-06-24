@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>Login | LMSThesis</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="./assets/images/favicon.ico"
+    >
+    
+    <!-- link stylesheet -->
+    <link rel="stylesheet" href="./assets/css/icofont.min.css" >
+    <link rel="stylesheet" href="./assets/css/popup.css" >
+
+    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" >
+    <link rel="stylesheet" href="./assets/css/video-modal.css" >
+    <link rel="stylesheet" href="./assets/css/aos.css" >
+    <link rel="stylesheet" href="./assets/css/style.css" >
+    <!-- poppins font -->
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+
+  
+
+  <body
+    class="relative font-[Poppins] font-normal text-base leading-[1.8] bg-bodyBg dark:bg-bodyBg-dark"
+    style="background-image: url('./assets/images/background.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+  >
+  
+    <!-- preloader -->
+    <div
+      class="preloader flex fixed top-0 left-0 h-screen w-full items-center justify-center z-xxl bg-whiteColor opacity-100 visible transition-all duration-700"
+    >
+      <!-- spinner -->
+      <div
+        class="w-90px h-90px border-5px border-t-blue border-r-blue border-b-blue-light border-l-blue-light rounded-full animate-spin-infinit"
+      ></div>
+      <div class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+        <img src="./assets/images/pre.png" alt="Preloader" class="h-10 w-10 block" >
+      </div>
+    </div>
+    <!-- theme fixed shadow -->
+    <div>
+      <div class="fixed-shadow left-[-250px]"></div>
+      <div class="fixed-shadow right-[-250px]"></div>
+    </div>
+
+    <!-- theme controller -->
+    <div
+      class="fixed top-[100px] 2xl:top-[300px] transition-all duration-300 right-[-50px] hover:right-0 z-xl"
+    >
+      <button
+        class="theme-controller w-90px h-10 bg-primaryColor dark:bg-whiteColor-dark rounded-l-lg2 text-whiteColor px-10px flex items-center dark:shadow-theme-controller"
+      >
+        <!-- dark -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="mr-10px w-5 block dark:hidden"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M160 136c0-30.62 4.51-61.61 16-88C99.57 81.27 48 159.32 48 248c0 119.29 96.71 216 216 216 88.68 0 166.73-51.57 200-128-26.39 11.49-57.38 16-88 16-119.29 0-216-96.71-216-216z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+          ></path>
+        </svg>
+        <span class="text-base block dark:hidden">Dark</span>
+        <!-- light -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="hidden mr-10px w-5 dark:block"
+          viewBox="0 0 512 512"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="32"
+            d="M256 48v48M256 416v48M403.08 108.92l-33.94 33.94M142.86 369.14l-33.94 33.94M464 256h-48M96 256H48M403.08 403.08l-33.94-33.94M142.86 142.86l-33.94-33.94"
+          ></path>
+          <circle
+            cx="256"
+            cy="256"
+            r="80"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="32"
+          ></circle>
+        </svg>
+        <span class="text-base hidden dark:block">Light</span>
+      </button>
+    </div>
+    <!-- scroll up button -->
+    <div>
+      <button
+        class=" scroll-up w-50px h-50px leading-50px text-center text-primaryColor bg-white hover:text-whiteColor hover:bg-primaryColor rounded-full fixed right-5 bottom-[60px] shadow-scroll-up z-medium text-xl dark:text-whiteColor dark:bg-primaryColor dark:hover:text-whiteColor-dark hidden"
+      >
+        <i class="icofont-rounded-up"></i>
+      </button>
+    </div>
+    <!--======= Header area start =======-->
+    <header>
+      <div
+        class="shadow-md transition-all duration-500 sticky-header z-medium dark:bg-whiteColor-dark bg-whiteColor"
+      >
+        <nav>
+          <div
+            class="py-15px lg:py-0 px-15px lg:container 3xl:container-secondary-lg 4xl:container mx-auto relative"
+          >
+            <div class="grid grid-cols-2 lg:grid-cols-12 items-center gap-15px">
+              <!-- navbar left -->
+              <div class="lg:col-start-1 lg:col-span-8">
+                <div class="flex items-center gap-8">
+                  <a href="index.html" class="block flex flex-row justify-start items-center flex-shrink-0">
+                  <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
+                  <!-- Light mode logo -->
+                  <img
+                    src="./assets/images/logo/au-logo.png"
+                    alt="Logo"
+                    class="w-10 h-10"
+                  />
+                  
+                  <!-- Light mode text -->
+                  <span class="text-xl font-bold text-primaryColor dark:hidden">
+                    Arellano <span class="text-black">University</span>
+                  </span>
+                  <!-- Dark mode text -->
+                  <span class="text-xl font-bold text-primaryColor hidden dark:block">
+                    Arellano <span class="text-white">University</span>
+                  </span>
+                </a>
+                
+                
+                <!-- Main menu - moved closer to logo -->
+                <div class="hidden lg:block flex-grow">
+                  <ul class="nav-list flex">
+                    <li class="nav-item group">
+                      <a
+                        href="#"
+                        class="text-[#96BCF0]  px-5 lg:px-10px 2xl:px-15px 3xl:px-5 py-10 lg:py-5 2xl:py-30px 3xl:py-10 leading-sm 2xl:leading-lg text-base lg:text-sm 2xl:text-base font-semibold block group-hover:text-primaryColor whitespace-nowrap"
+                      >
+                        Extra Link 1
+                      </a>
+                    </li>
+                    <li class="nav-item group relative">
+                      <a
+                        href="./pages/dashboards/instructor-dashboard.html"
+                        class=" text-[#96BCF0] px-5 lg:px-10px 2xl:px-15px 3xl:px-5 py-10 lg:py-5 2xl:py-30px 3xl:py-10 leading-sm 2xl:leading-lg text-base lg:text-sm 2xl:text-base font-semibold block group-hover:text-primaryColor whitespace-nowrap"
+                      >
+                        Extra Link 2
+                      </a>
+                      
+                    </li>
+                    <li class="nav-item group relative">
+                      <a
+                        href="./pages/ecommerce/shop.html"
+                        class="text-[#96BCF0]  px-5 lg:px-10px 2xl:px-15px 3xl:px-5 py-10 lg:py-5 2xl:py-30px 3xl:py-10 leading-sm 2xl:leading-lg text-base lg:text-sm 2xl:text-base font-semibold block group-hover:text-primaryColor  whitespace-nowrap"
+                      >
+                        Extra Link 3
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                </div>
+              </div>
+              
+              <!-- navbar right -->
+              <div class="lg:col-start-9 lg:col-span-4">
+                <ul class="relative nav-list flex justify-end items-center">
+                  <li
+                    class="px-5 lg:px-10px 2xl:px-5 lg:py-4 2xl:py-26px 3xl:py-9 group"
+                  >
+                    
+                    <div
+                      class="dropdown absolute top-full right-0 lg:right-8 z-medium hidden opacity-0"
+                      style="transition: 0.3s"
+                    >
+                      
+                  </li>
+                  <li class="hidden lg:block">
+                  </li>
+                  <li class="hidden lg:block">
+                    <a
+                      href="#"
+                      class="text-size-12 2xl:text-size-15 text-whiteColor bg-primaryColor block border-primaryColor border hover:text-primaryColor hover:bg-white px-15px py-2 rounded-standard dark:hover:bg-whiteColor-dark dark: dark:hover:text-whiteColor"
+                      >Additional Button</a
+                    >
+                  </li>
+                  <li class="block lg:hidden">
+                    <button
+                      class="open-mobile-menu text-3xl text-darkdeep1 hover:text-secondaryColor dark:text-whiteColor dark:hover:text-secondaryColor"
+                    >
+                      <i class="icofont-navigation-menu"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!-- navbar end -->
+
+      <!-- mobile menu -->
+      <div
+        class="mobile-menu w-mobile-menu-sm md:w-mobile-menu-lg fixed top-0 -right-[280px] md:-right-[330px] transition-all duration-500 w-mobile-menu h-full shadow-dropdown-secodary bg-whiteColor dark:bg-whiteColor-dark z-high block lg:hidden"
+      >
+        <button
+          class="close-mobile-menu text-lg bg-darkdeep1 hover:bg-secondaryColor text-white px-[11px] py-[6px] absolute top-0 right-full hidden"
+        >
+          <i class="icofont icofont-close-line"></i>
+        </button>
+        <!-- mobile menu wrapper -->
+        <div
+          class="px-5 md:px-30px pt-5 md:pt-10 pb-50px h-full overflow-y-auto"
+        >
+
+          <!-- mobile menu accordions -->
+          <div
+            class="pt-8 pb-6 border-b border-borderColor dark:border-borderColor-dark"
+          >
+            <ul class="accordion-container">
+              <li class="accordion">
+                <!-- accordion header -->
+                <div class="flex items-center justify-between">
+                  <a
+                    class="leading-1 py-11px text-darkdeep1 font-medium hover:text-secondaryColor dark:text-whiteColor dark:hover:text-secondaryColor"
+                    href="index.html"
+                    >Extra Link 1</a
+                  >
+                </div>
+              </li>
+              <li class="accordion">
+                <!-- accordion header -->
+                <div class="flex items-center justify-between">
+                  <a
+                    class="leading-1 py-11px text-darkdeep1 font-medium hover:text-secondaryColor dark:text-whiteColor dark:hover:text-secondaryColor"
+                    href="#"
+                    >Extra Link 2</a
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- Mobile menu social area -->
+          <div>
+            <ul class="flex gap-6 items-center mb-5">
+              <li>
+                <a class="facebook" href="#"
+                  ><i
+                    class="icofont icofont-facebook text-fb-color dark:text-whiteColor dark:hover:text-secondaryColor"
+                  ></i
+                ></a>
+              </li>
+              <li>
+                <a class="twitter" href="#"
+                  ><i
+                    class="icofont icofont-twitter text-twiter-color dark:text-whiteColor dark:hover:text-secondaryColor"
+                  ></i
+                ></a>
+              </li>
+              <li>
+                <a class="pinterest" href="#"
+                  ><i
+                    class="icofont icofont-pinterest dark:text-whiteColor dark:hover:text-secondaryColor"
+                  ></i
+                ></a>
+              </li>
+              <li>
+                <a class="instagram" href="#"
+                  ><i
+                    class="icofont icofont-instagram dark:text-whiteColor dark:hover:text-secondaryColor"
+                  ></i
+                ></a>
+              </li>
+              <li>
+                <a class="google" href="#"
+                  ><i
+                    class="icofont icofont-youtube-play dark:text-whiteColor dark:hover:text-secondaryColor"
+                  ></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- main body -->
+    <main class="bg-transparent">
+      <!-- banner section -->
+      
+      <!--form section -->
+      <section class="relative ">
+        <div class="  flex items-center justify-end min-h-[80vh] pr-8 md:pr-16 lg:pr-24">
+          <div class="w-full max-w-md px-4">
+            <!-- tab controller -->
+
+            <div
+              class="tab-links grid grid-cols-2 gap-11px text-blackColor text-lg lg:text-size-22 font-semibold font-[Poppins] mb-43px mt-30px md:mt-0"
+            >
+              
+            </div>
+
+            <!--  tab contents -->
+            <div
+              class="shadow-container w-[450px] mb-10 bg-whiteColor dark:bg-whiteColor-dark  md:p-50px  rounded-5px"
+            >
+              <div class="tab-contents">
+                <!-- login form-->
+                <div
+                  class="block opacity-100 transition-opacity duration-150 ease-linear"
+                >
+                  <!-- heading   -->
+                  <div class="text-center">
+                    <h3
+                      class="text-2xl font-[Poppins] font-bold text-[#1E3A5F] mb-2 leading-normal dark:text-whiteColor"
+                    >
+                      Login
+                    </h3>
+                    <p
+                      class="text-contentColor text-sm dark:text-contentColor-dark mb-15px"
+                    >
+                      Please enter your username and password
+                    </p>
+                  </div>
+
+                  <form class="pt-2" data-aos="fade-up" id="loginForm">
+                    <div class="mb-10px">
+                      <label
+                        class="text-contentColor dark:text-contentColor-dark mb-10px block"
+                        style="font-weight: 500;"
+                        >Username or email</label
+                      >
+                      <input
+                        type="text"
+                        id="username"
+                        maxlength="20"
+                        placeholder="Your username or email"
+                        class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded"
+                      >
+                      <div id="error-msg" class="text-red-500 text-sm h-6">
+                        <small id="usernameError" class="error-message" ></small>
+                      </div>
+                    </div>
+
+                    <div class="mb-10px">
+                      <label
+                        class="text-contentColor dark:text-contentColor-dark mb-10px block"
+                        style="font-weight: 500;"
+                        >Password</label
+                      >
+                      <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded"
+                      >
+                      <div id="error-msg" class="text-red-500 text-sm h-6">
+                      <small id="passwordError" class="error-message" ></small>
+                      </div>
+                    </div>
+                    <!-- Options -->
+                    <div
+                      class="text-contentColor dark:text-contentColor-dark flex items-center justify-between"
+                    >
+                      <div class="flex items-center">
+                        <input
+                          type="checkbox"
+                          id="remember"
+                          class="w-18px h-18px mr-2 block box-content">
+                        <label for="remember"> Remember me</label>
+                      </div>
+                      <div>
+                      </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class=" text-center pt-10">
+                      <button
+                        type="submit"
+                        class="text-size-15 text-whiteColor bg-primaryColor px-25px py-10px w-full border border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark"
+                      >
+                        Log in
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <!-- sign up form-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- animated icons -->
+        <div>
+          <img
+            loading="lazy"
+            class="absolute left-[5%] top-1/2 animate-move-hor"
+            src="./assets/images/education/hero_shape3.png"
+            alt="Shape"
+          >
+          <img
+            loading="lazy"
+            class="absolute left-1/2 bottom-[60px] animate-spin-slow"
+            src="./assets/images/education/hero_shape4.png"
+            alt="Shape"
+          >
+          <img
+            loading="lazy"
+            class="absolute left-1/2 top-10 animate-spin-slow"
+            src="./assets/images/education/hero_shape5.png"
+            alt="Shape"
+          >
+        </div>
+      </section>
+    </main>
+    
+       <script src="./assets/js/swiper-bundle.min.js"></script>
+    <script src="./assets/js/isotope.pkgd.min.js"></script>
+    <script src="./assets/js/accordion.js"></script>
+    <script src="./assets/js/chart.js"></script>
+    <script src="./assets/js/count.js"></script>
+    <script src="./assets/js/countdown.js"></script>
+    <script src="./assets/js/counterup.js"></script>
+    <script src="./assets/js/dropdown.js"></script>
+    <script src="./assets/js/filter.js"></script>
+    <script src="./assets/js/mobileMenu.js"></script>
+    <script src="./assets/js/modal.js"></script>
+    <script src="./assets/js/popup.js"></script>
+    <script src="./assets/js/preloader.js"></script>
+    <script src="./assets/js/scrollUp.js"></script>
+    <script src="./assets/js/slider.js"></script>
+    <script src="./assets/js/smoothScroll.js"></script>
+    <script src="./assets/js/stickyHeader.js"></script>
+    <script src="./assets/js/tabs.js"></script>
+    <script src="./assets/js/theme.js"></script>
+    <script src="./assets/js/videoModal.js"></script>
+    <script  src="./assets/js/vanilla-tilt.js"></script>
+    <script  src="./assets/js/aos.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+    <script>
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
+  const rememberCheck = document.getElementById("remember");
+
+  const usernameError = document.getElementById("usernameError");
+  const passwordError = document.getElementById("passwordError");
+
+  // Load saved username
+  window.onload = () => {
+    const saved = localStorage.getItem("savedUsername");
+    if (saved) {
+      usernameInput.value = saved;
+      rememberCheck.checked = true;
+    }
+  };
+
+  
+  // Validate form
+document.getElementById("loginForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  let valid = true;
+
+  // Reset errors
+  usernameError.textContent = "";
+  usernameError.classList.remove("show");
+  passwordError.textContent = "";
+  passwordError.classList.remove("show");
+
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  // Username rules
+  if (username === "") {
+    usernameError.textContent = "Username cannot be empty.";
+    usernameError.classList.add("show");
+    valid = false;
+  } else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+    usernameError.textContent = "Only letters and numbers allowed.";
+    usernameError.classList.add("show");
+    valid = false;
+  } else if (username.length > 20) {
+    usernameError.textContent = "Maximum 20 characters allowed.";
+    usernameError.classList.add("show");
+    valid = false;
+  }
+
+  // Password rules
+  if (password === "") {
+    passwordError.textContent = "Password cannot be empty.";
+    passwordError.classList.add("show");
+    valid = false;
+  }
+
+  // If everything is valid
+  if (valid) {
+    if (rememberCheck.checked) {
+      localStorage.setItem("savedUsername", username);
+    } else {
+      localStorage.removeItem("savedUsername");
+    }
+    alert("✅ Login successful!");
+  }
+});
+
+</script>
+<!-- footer import -->
+<script src="./components/footer.js"></script>
+<div id="footer"></div>
+  </body>
+
+
+</html>

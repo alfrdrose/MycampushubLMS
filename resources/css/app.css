@@ -1,0 +1,686 @@
+/*********************************************************************************
+
+	Template Name: Edurock - Education LMS Template
+    Author: Kamrul Hasan
+    Support: kamrulishasan34@gmail.com
+    Description: Edurock -  Education, online course, tailwind v3.0 and vanilla js Template.
+    Version: 1.0.0
+
+****************
+*****************************************************************/
+
+/**************************************************************
+
+	Start Style sheet Indexing
+	|
+	|___ Default Styles
+	| |___ Variables
+	| |___ Extend
+    |
+	|___Header Styles
+	| |___ sticky header
+    |
+	|___tab
+	|
+    |___preloader
+    |
+	|___filter
+	|
+	|___swiper
+    | |___ hero
+    | |___ featured courses
+    | |___ testimonial
+    | |___ swiper pagination
+    |
+	|___tooltip
+	|
+	|___accordion
+    | |___ fees
+    | |___ faq
+    | |___ shop
+	|
+	|___ responsive
+	|
+	|___ tailwind directives
+
+***************************************************************/
+
+/* font family */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+/* Variables */
+:root {
+    --blackColor: #000000;
+    --whiteColor: #ffffff;
+    --darkdeep1: #170f2f;
+    --primaryColor: #5f2ded;
+    --secondaryColor: #f2277e;
+    --blue: #0c63e4;
+    --blue2: rgba(13, 110, 253, 0.25);
+    --blueLight: #bdd4fa;
+    --blueLight1: #e7f1ff;
+    --borderColor: #eeeeee;
+    --lightGrey4: #a2a9b6;
+    --borderColor2: #dddddd;
+}
+.dark {
+    --blueLight1: #0c0e2b;
+    --borderColor: #312a57;
+    --borderColor2: #fff;
+}
+/* Extend */
+a {
+    display: inline-block;
+}
+a,
+button,
+span {
+    transition: 0.3s;
+}
+body, h1, h2, h3, h4, h5, h6, p, a, button, span {
+    font-family: "Poppins", sans-serif;
+}
+
+#teacherSidebar.collapsed {
+    width: 60px !important; /* mini sidebar */
+}
+.lesson-description * {
+    color: inherit !important;
+}
+/* Dark mode toolbar background */
+.dark trix-toolbar {
+    background-color: #1E1E2D; /* dark toolbar background */
+}
+.dashboard-wrapper {
+  max-width: 1680px;
+  margin-inline: auto;
+}
+
+
+/* Toolbar buttons */
+.dark trix-toolbar [data-trix-button-group] button {
+    color: #FFFFFF; /* white icons/text */
+    background: transparent;
+    border: none;
+}
+
+/* Hide attach files button (ALL cases) */
+trix-toolbar [data-trix-button-group="file-tools"],
+trix-toolbar button.trix-button--icon-attach,
+trix-toolbar button[data-trix-action="attachFiles"] {
+    display: none !important;
+}
+
+/* Disable Link */
+trix-toolbar button.trix-button--icon-link {
+    display: none;
+}
+
+/* Disable Code */
+trix-toolbar button.trix-button--icon-code {
+    display: none;
+}
+
+
+/* Hover/focus states */
+.dark trix-toolbar [data-trix-button-group] button:hover,
+.dark trix-toolbar [data-trix-button-group] button:focus {
+    background-color: #5F2DED33; /* semi-transparent highlight */
+    color: #FFFFFF;
+}
+
+/* Dropdowns like font, heading, etc. */
+.dark trix-toolbar .trix-button--icon {
+    filter: invert(100%); /* invert icons if needed */
+}
+
+/* Optional: placeholder text in dark mode */
+trix-editor[placeholder]:empty:before {
+    color: #A0AEC0; /* light gray for dark mode */
+}
+
+/* Restore list icons inside Trix (because we're not using prose) */
+trix-editor ul,
+.trix-content ul {
+    list-style-type: disc !important;
+    padding-left: 1.25rem !important;
+}
+
+trix-editor ol,
+.trix-content ol {
+    list-style-type: decimal !important;
+    padding-left: 1.25rem !important;
+}
+
+/* Ensure Trix editor expands properly */
+trix-editor {
+    width: 100% !important;
+    display: block !important;
+    max-width: none !important;
+}
+
+/* For account update page */
+/* Generic disabled input look */
+input:disabled {
+    background-color: #e5e7eb !important;   /* light gray */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Dark mode support */
+.dark input:disabled {
+    background-color: #374151 !important;
+    color: #9ca3af !important;
+}
+
+
+
+/* Start of Custom CSS */
+/* -----------------------------
+   FullCalendar Compact & Dark Mode
+   ----------------------------- */
+
+/* Outer container */
+.fc {
+    border: 1px solid #e0e0e0; /* light border default */
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.dark .fc {
+    border-color: #444;
+}
+
+/* Header background */
+.fc .fc-toolbar.fc-header-toolbar {
+    background-color: #FF4081;
+    color: white;
+}
+
+.dark .fc .fc-toolbar.fc-header-toolbar {
+    color: #f0f0f0;
+}
+
+/* Title in center */
+.fc .fc-toolbar-title {
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+}
+
+.dark .fc .fc-toolbar-title {
+    color: #f0f0f0;
+}
+
+/* Prev/Next buttons */
+.fc .fc-button {
+    background-color: #FF4081;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.fc .fc-button:hover {
+    background-color: #e73370;
+}
+
+.dark .fc .fc-button {
+    color: #f0f0f0;
+}
+
+/* Day headers */
+.fc .fc-col-header-cell {
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.dark .fc .fc-col-header-cell {
+    color: #ccc;
+    background-color: #0C0E2B;
+}
+
+/* Day cells */
+.fc .fc-daygrid-day {
+    font-size: 0.75rem;      /* smaller text */
+    padding: 0.1rem;         /* tighter spacing */
+    height: auto;            /* let FullCalendar compute height */
+    width: auto;             /* let FullCalendar compute width */
+    text-align: center;      
+    vertical-align: middle;
+    background-color: white;
+    color: black;
+    border: none;                  /* borderless */
+}
+
+.dark .fc .fc-daygrid-day {
+    background-color: #0C0E2B;
+    color: #ddd;
+}
+
+/* Current day */
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: #FF4081;
+    color: white;
+    border-radius: 0.25rem;
+}
+
+.dark .fc .fc-daygrid-day.fc-day-today {
+    background-color: #e73370;
+    color: #fff;
+}
+
+/* Remove all borders */
+.fc,
+.fc .fc-scrollgrid .fc-scrollgrid-section > table,
+.fc .fc-col-header-cell,
+.fc .fc-daygrid-day {
+    border: none !important;
+}
+
+.dark input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+
+
+
+
+.sidebar-item {
+    @apply flex items-center gap-3 hover:bg-[#EFEAFD] hover:p-2 hover:rounded-lg
+         hover:transition-all duration-300 cursor-pointer
+         text-lg font-[380] text-[#5E5F60] dark:text-white
+         hover:pl-10 hover:text-[#5F2DED] hover:font-bold
+         dark:hover:text-[#3B82F6] dark:hover:bg-gray-700;
+}
+
+.sidebar-icon {
+    @apply w-6 h-6 flex items-center justify-center;
+}
+
+/* Thin scrollbar (default) */
+.scrollbar-thin {
+    scrollbar-width: thin; /* Firefox */
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent !important; /* removes white track */
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1; /* slate-300 (light mode) */
+    border-radius: 9999px;
+}
+
+/* Dark mode overrides */
+.dark .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent !important; /* keeps track invisible in dark mode */
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #475569; /* slate-600 */
+}
+
+/* End of Custom CSS */
+
+/* sticky header */
+.sticky-header.active {
+    background: var(--whiteColor);
+    box-shadow: 0 0 50px 10px rgba(95, 45, 237, 0.15);
+}
+
+/* tab */
+.dark .tab-links .inActive {
+    background: var(--darkdeep1);
+}
+.tab-links .active::before {
+    width: 100%;
+}
+.courses-header .tab-links .active {
+    color: var(--primaryColor);
+}
+.course-details-tab .tab-links .active {
+    background: var(--primaryColor);
+    color: var(--whiteColor);
+}
+.product-details-course button.active {
+    color: var(--primaryColor);
+}
+/* perloder */
+.preloader.hide {
+    animation: preloaderHide 0.3s linear;
+}
+/* filter active style */
+.button-group .is-checked {
+    color: var(--primaryColor) !important;
+}
+
+.button-group .is-checked::before {
+    width: 100%;
+}
+/* swiper slider */
+.swiper {
+    width: 100%;
+}
+
+/* hero */
+.hero .swiper-button-prev,
+.hero .swiper-button-next,
+.featured-courses .swiper-button-prev,
+.featured-courses .swiper-button-next {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    z-index: 9999 !important;
+}
+.hero .swiper-button-prev::after,
+.hero .swiper-button-next::after,
+.featured-courses .swiper-button-prev::after,
+.featured-courses .swiper-button-next::after {
+    font-size: 20px;
+    color: var(--lightGrey4);
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--lightGrey4);
+    line-height: 50px;
+    border-radius: 100%;
+    transition: 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9999 !important;
+}
+.hero .swiper-button-prev::after {
+    transform: translateX(30px);
+}
+.hero .swiper-button-next::after {
+    transform: translateX(-30px);
+}
+.hero .swiper-button-prev:hover::after,
+.hero .swiper-button-next:hover::after,
+.featured-courses .swiper-button-prev:hover::after,
+.featured-courses .swiper-button-next:hover::after {
+    color: var(--whiteColor);
+    background: var(--primaryColor);
+    border-color: var(--primaryColor);
+}
+
+.hero:hover .swiper-button-prev::after,
+.hero:hover .swiper-button-next::after {
+    opacity: 100;
+    visibility: visible;
+    transform: translateX(0);
+}
+/* featured courses */
+.featured-courses .swiper-button-prev::after,
+.featured-courses .swiper-button-next::after {
+    opacity: 100;
+    visibility: visible;
+    border-radius: 4px;
+}
+.featured-courses .swiper-button-prev::after {
+    transform: translateX(-4px);
+}
+.featured-courses .swiper-button-next::after {
+    transform: translateX(4px);
+}
+/* testimonial */
+.testimonial .swiper-button-prev::after,
+.testimonial .swiper-button-next::after {
+    display: none;
+}
+
+.testimonial .swiper {
+    position: static;
+}
+.testimonial .swiper-button-prev::before,
+.testimonial .swiper-button-next::before {
+    font-family: "Poppins", sans-serif;
+    color: var(--blackColor);
+    font-size: 30px;
+    transition: 0.3s;
+}
+.dark .testimonial .swiper-button-prev::before,
+.dark .testimonial .swiper-button-next::before {
+    color: var(--whiteColor);
+}
+.testimonial .swiper-button-prev::before {
+    content: "\ea93";
+}
+.testimonial .swiper-button-next::before {
+    content: "\ea94";
+}
+.testimonial .swiper-button-next:hover:before,
+.testimonial .swiper-button-prev:hover::before {
+    color: var(--secondaryColor);
+}
+
+/* swiper pagination */
+.hero .swiper-pagination {
+    bottom: 80px;
+}
+.hero .card-slider .swiper-pagination {
+    bottom: -26px;
+}
+.hero .swiper-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: transparent;
+    outline: 2px solid var(--blackColor);
+    outline-offset: 2px;
+    margin: 0 8px;
+}
+.machine-learning .swiper-pagination .swiper-pagination-bullet,
+.dark .machine-learning .swiper-pagination .swiper-pagination-bullet {
+    outline: 2px solid var(--whiteColor);
+}
+.dark .hero .swiper-pagination .swiper-pagination-bullet {
+    outline: 2px solid var(--whiteColor);
+}
+
+.hero .swiper-pagination .swiper-pagination-bullet-active,
+.dark .hero .swiper-pagination .swiper-pagination-bullet-active {
+    background: var(--primaryColor);
+    outline-color: var(--primaryColor);
+}
+.machine-learning .swiper-pagination .swiper-pagination-bullet-active,
+.dark .machine-learning .swiper-pagination .swiper-pagination-bullet-active {
+    background: var(--whiteColor);
+    outline: 2px solid var(--whiteColor);
+}
+.hero .card-slider .swiper-slide-shadow {
+    display: none;
+}
+
+/* animation */
+.play-state {
+    animation-play-state: running;
+}
+.play-state:hover {
+    animation-play-state: paused;
+}
+/* tooltip */
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after,
+.tooltip::before {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    color: var(--whiteColor);
+    transform: translateX(-50%);
+    visibility: hidden;
+    opacity: 0;
+    font-size: 12px;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+.tooltip::after {
+    content: attr(data-tip);
+    background-color: var(--blackColor);
+    padding: 5px 10px;
+    border-radius: 5px;
+    top: -40px;
+}
+
+.tooltip::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: var(--blackColor);
+    top: -13px;
+}
+.tooltip:hover::after,
+.tooltip:hover::before {
+    visibility: visible;
+    opacity: 100;
+}
+/* accordion */
+/* fees  */
+.fees .active .accordion-controller,
+.curriculum .active .accordion-controller {
+    /* background-color: #e7f1ff; */
+    background-color: var(--blueLight1);
+}
+.fees .active .accordion-controller svg,
+.curriculum .active .accordion-controller svg {
+    transform: rotate(-179.999deg);
+    fill: var(--blue);
+}
+/* create course */
+.create-course .active .accordion-controller {
+    background-color: transparent;
+    border-bottom: 1px solid var(--borderColor2);
+}
+
+.create-course .active .accordion-controller:focus {
+    box-shadow: 0 0 0 0.25rem var(--blue2);
+    border-bottom: 1px solid transparent;
+}
+.create-course .accordion-controller:focus {
+    box-shadow: 0 0 0 0.25rem var(--blue2);
+}
+/* faq */
+.faq .accordion-controller:focus {
+    outline-style: solid;
+    outline-color: var(--blueLight);
+}
+
+.faq .active .accordion-controller {
+    background-color: transparent !important;
+    border-bottom-color: var(--borderColor);
+}
+/* shop */
+.shop .accordion.active p:first-child {
+    margin-top: 8px;
+    transform: translateX(0) rotate(90deg);
+}
+
+/* responsive */
+@media screen and (min-width: 768px) {
+    /* swiper pagination */
+    .hero .swiper-pagination {
+        bottom: 100px;
+    }
+    .machine-learning .swiper-pagination,
+    .kindergarden .swiper-pagination {
+        bottom: 30px;
+    }
+    .hero .card-slider .swiper-pagination {
+        bottom: -26px;
+    }
+    .prev-btn,
+    .next-btn {
+        border-width: 15px;
+    }
+}
+@media screen and (min-width: 992px) {
+    .hero .swiper-pagination {
+        bottom: 80px;
+    }
+    .machine-learning .swiper-pagination,
+    .kindergarden .swiper-pagination {
+        bottom: 30px;
+    }
+    .hero .card-slider .swiper-pagination {
+        bottom: -26px;
+    }
+}
+@media screen and (min-width: 1366px) {
+    /* swiper slider */
+    .hero .swiper-button-prev,
+    .hero .swiper-button-next {
+        width: 70px;
+        height: 70px;
+    }
+    .hero .swiper-button-prev::after,
+    .hero .swiper-button-next::after {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+    }
+    /* Remove autofill background completely */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:focus-visible,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus-visible,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:focus-visible {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  box-shadow: 0 0 0 1000px transparent inset !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Dark mode: force text color ALWAYS */
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:focus-visible,
+.dark textarea:-webkit-autofill,
+.dark textarea:-webkit-autofill:hover,
+.dark textarea:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill:focus-visible {
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  caret-color: #ffffff;
+}
+
+
+
+
+}
+
+/* // tailwind directives */
+@tailwind base;
+@layer base {
+  html {
+    font-family: "Poppins", sans-serif;
+    scrollbar-gutter: stable overlay;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
+.container-fluid-2 {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+
+@tailwind components;
+@tailwind utilities;
