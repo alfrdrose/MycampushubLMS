@@ -1,0 +1,44 @@
+# Render Blueprint — deploys My Campus LMS as a single Dockerized web service.
+# Free tier: sleeps after ~15 min idle, auto-wakes on the next request.
+# Database: bundled SQLite (ephemeral). Demo data is re-seeded on every deploy.
+services:
+  - type: web
+    name: mycampus-lms
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    healthCheckPath: /
+    envVars:
+      - key: APP_NAME
+        value: "My Campus LMS"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      # Generate once with: php artisan key:generate --show
+      # then paste the value here OR set it in the Render dashboard.
+      - key: APP_KEY
+        sync: false
+      # Render injects the real external URL at runtime; this is a safe default.
+      - key: APP_URL
+        value: https://mycampus-lms.onrender.com
+
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /app/database/database.sqlite
+
+      # No external services on the free demo — keep everything file/sync based.
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: MAIL_MAILER
+        value: log
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: FILESYSTEM_DISK
+        value: local
