@@ -32,9 +32,11 @@ COPY . .
 # Built assets from the frontend stage
 COPY --from=frontend /app/public/build ./public/build
 
-# Finish composer (runs package:discover etc. now that source is present)
-RUN composer dump-autoload --optimize \
-    && mkdir -p storage/framework/{sessions,views,cache} storage/logs bootstrap/cache \
+# Finish composer. Use --no-scripts so Laravel is NOT booted during the build
+# (package:discover would try to connect to the DB, which doesn't exist yet —
+# it's created at runtime in start.sh). Discovery is regenerated at boot.
+RUN composer dump-autoload --optimize --no-scripts \
+    && mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
 # Render provides $PORT; default to 8080 locally

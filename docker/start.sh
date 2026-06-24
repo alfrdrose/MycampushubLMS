@@ -14,6 +14,10 @@ if [ -z "$APP_KEY" ]; then
     php artisan key:generate --force
 fi
 
+# Regenerate Laravel's package manifest (skipped at build time because the DB
+# didn't exist yet). Now that the DB and env are present, this succeeds.
+php artisan package:discover --ansi
+
 # Storage symlink (ignore error if it already exists)
 php artisan storage:link || true
 
