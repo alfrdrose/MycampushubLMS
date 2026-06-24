@@ -20,6 +20,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Render (and most PaaS) sit behind a load balancer. Trust its
+        // forwarded headers so Laravel knows the request is HTTPS.
+        $middleware->trustProxies(at: '*');
+
         $middleware
             ->alias([
                 'role' => RoleMiddleware::class,
